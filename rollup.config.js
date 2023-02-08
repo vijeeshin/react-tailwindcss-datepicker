@@ -7,6 +7,7 @@ const options = require("./tsconfig.json");
 
 module.exports = {
     input: "src/index.tsx",
+    inlineDynamicImports: true,
     output: [
         {
             file: packageJson.main,
