@@ -1215,7 +1215,6 @@ const Week = () => {
 };
 
 const Years = ({ year, clickYear, endYear, sYear }) => {
-    console.log(year);
     return (React__default["default"].createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(sYear, endYear).map((item, index) => (React__default["default"].createElement(RoundedButton, { key: index, padding: "py-3", onClick: () => {
             clickYear(item);
         } },

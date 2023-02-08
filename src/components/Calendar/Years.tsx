@@ -12,7 +12,6 @@ interface Props {
 }
 
 const Years: React.FC<Props> = ({ year, clickYear, endYear, sYear }) => {
-    console.log(year);
     return (
         <div className="w-full grid grid-cols-2 gap-2 mt-2">
             {generateArrayNumber(sYear, endYear).map((item, index) => (
