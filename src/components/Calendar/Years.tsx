@@ -9,7 +9,9 @@ interface Props {
 }
 
 const Years: React.FC<Props> = ({ year, clickYear }) => {
+
     const date1 = dayjs();
+    
     return (
         <div className="w-full grid grid-cols-2 gap-2 mt-2">
             {generateArrayNumber(year, date1.diff(year, "year")).map((item, index) => (
