@@ -1373,7 +1373,9 @@ const Calendar = ({ endYear, date, onClickPrevious, onClickNext, changeMonth, ch
                     React__default["default"].createElement(ChevronLeftIcon, { className: "h-5 w-5" })))),
             showYears && (React__default["default"].createElement("div", { className: "flex-none" },
                 React__default["default"].createElement(RoundedButton, { roundedFull: true, onClick: () => {
-                        setYear(year - 12);
+                        if (!endYear) {
+                            setYear(year - 1);
+                        }
                     } },
                     React__default["default"].createElement(DoubleChevronLeftIcon, { className: "h-5 w-5" })))),
             React__default["default"].createElement("div", { className: "flex flex-1 items-center space-x-1.5" },
@@ -1394,7 +1396,9 @@ const Calendar = ({ endYear, date, onClickPrevious, onClickNext, changeMonth, ch
                     React__default["default"].createElement(ChevronRightIcon, { className: "h-5 w-5" })))),
             showYears && (React__default["default"].createElement("div", { className: "flex-none" },
                 React__default["default"].createElement(RoundedButton, { roundedFull: true, onClick: () => {
-                        setYear(year + 12);
+                        if (year < endYear) {
+                            setYear(year + 1);
+                        }
                     } },
                     React__default["default"].createElement(DoubleChevronRightIcon, { className: "h-5 w-5" }))))),
         React__default["default"].createElement("div", { className: "px-0.5 sm:px-2 mt-0.5 min-h-[285px]" },

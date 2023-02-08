@@ -248,7 +248,9 @@ const Calendar: React.FC<Props> = ({
                         <RoundedButton
                             roundedFull={true}
                             onClick={() => {
-                                setYear(year - 12);
+                                if (!endYear) {
+                                    setYear(year - 1);
+                                }
                             }}
                         >
                             <DoubleChevronLeftIcon className="h-5 w-5" />
@@ -293,7 +295,9 @@ const Calendar: React.FC<Props> = ({
                         <RoundedButton
                             roundedFull={true}
                             onClick={() => {
-                                setYear(year + 12);
+                                if (year < endYear) {
+                                    setYear(year + 1);
+                                }
                             }}
                         >
                             <DoubleChevronRightIcon className="h-5 w-5" />
