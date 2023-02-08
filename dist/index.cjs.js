@@ -1224,7 +1224,7 @@ const Week = () => {
 
 const Years = ({ year, clickYear }) => {
     const date1 = new Date().getFullYear();
-    return (React__default["default"].createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(year, date1 - year).map((item, index) => (React__default["default"].createElement(RoundedButton, { key: index, padding: "py-3", onClick: () => {
+    return (React__default["default"].createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(year, year + (date1 - year)).map((item, index) => (React__default["default"].createElement(RoundedButton, { key: index, padding: "py-3", onClick: () => {
             clickYear(item);
         } },
         React__default["default"].createElement(React__default["default"].Fragment, null, item))))));

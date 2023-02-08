@@ -14,7 +14,7 @@ const Years: React.FC<Props> = ({ year, clickYear }) => {
 
     return (
         <div className="w-full grid grid-cols-2 gap-2 mt-2">
-            {generateArrayNumber(year, date1 - year).map((item, index) => (
+            {generateArrayNumber(year, year + (date1 - year)).map((item, index) => (
                 <RoundedButton
                     key={index}
                     padding="py-3"
