@@ -1216,15 +1216,10 @@ const Week = () => {
 };
 
 const Years = ({ year, clickYear, endYear }) => {
-    return (React.createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" },
-        React.createElement(RoundedButton, { padding: "py-3", onClick: () => {
-                clickYear(2023);
-            } },
-            React.createElement(React.Fragment, null, "2023")),
-        generateArrayNumber(year, endYear).map((item, index) => (React.createElement(RoundedButton, { key: index, padding: "py-3", onClick: () => {
-                clickYear(item);
-            } },
-            React.createElement(React.Fragment, null, item))))));
+    return (React.createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(year, endYear).map((item, index) => (React.createElement(RoundedButton, { key: index, padding: "py-3", onClick: () => {
+            clickYear(item);
+        } },
+        React.createElement(React.Fragment, null, item))))));
 };
 
 const Calendar = ({ endYear, date, onClickPrevious, onClickNext, changeMonth, changeYear }) => {
