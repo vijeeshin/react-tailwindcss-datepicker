@@ -10,11 +10,11 @@ interface Props {
 }
 
 const Years: React.FC<Props> = ({ year, clickYear }) => {
-    const date1 = dayjs();
+    const date1 = new Date().getFullYear();
 
     return (
         <div className="w-full grid grid-cols-2 gap-2 mt-2">
-            {generateArrayNumber(year, date1.diff(year, "year")).map((item, index) => (
+            {generateArrayNumber(year, date1 - year).map((item, index) => (
                 <RoundedButton
                     key={index}
                     padding="py-3"
