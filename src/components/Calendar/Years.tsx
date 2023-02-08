@@ -13,6 +13,14 @@ interface Props {
 const Years: React.FC<Props> = ({ year, clickYear, endYear }) => {
     return (
         <div className="w-full grid grid-cols-2 gap-2 mt-2">
+            <RoundedButton
+                padding="py-3"
+                onClick={() => {
+                    clickYear(2023);
+                }}
+            >
+                <>2023</>
+            </RoundedButton>
             {generateArrayNumber(year, endYear).map((item, index) => (
                 <RoundedButton
                     key={index}
