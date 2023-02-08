@@ -14,6 +14,7 @@ import { Period, DateValueType, DateType, DateRangeType, ClassNamesTypeProp } fr
 import { Arrow, VerticalDash } from "./utils";
 
 interface Props {
+    endYear: number;
     primaryColor?: string;
     value: DateValueType;
     onChange: (value: DateValueType, e?: HTMLInputElement | null | undefined) => void;
@@ -55,6 +56,7 @@ interface Props {
 }
 
 const Datepicker: React.FC<Props> = ({
+    endYear = new Date().getFullYear(),
     primaryColor = "blue",
     value = null,
     onChange,
@@ -362,6 +364,7 @@ const Datepicker: React.FC<Props> = ({
                                 } pr-2 lg:pr-1`}
                             >
                                 <Calendar
+                                    endYear={endYear}
                                     date={firstDate}
                                     onClickPrevious={previousMonthFirst}
                                     onClickNext={nextMonthFirst}
@@ -376,6 +379,7 @@ const Datepicker: React.FC<Props> = ({
                                         </div>
 
                                         <Calendar
+                                            endYear={endYear}
                                             date={secondDate}
                                             onClickPrevious={previousMonthSecond}
                                             onClickNext={nextMonthSecond}

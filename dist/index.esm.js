@@ -1215,14 +1215,14 @@ const Week = () => {
         .format("ddd"))))))));
 };
 
-const Years = ({ year, clickYear }) => {
-    return (React.createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(year, new Date().getFullYear()).map((item, index) => (React.createElement(RoundedButton, { key: index, padding: "py-3", onClick: () => {
+const Years = ({ year, clickYear, endYear }) => {
+    return (React.createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(year, endYear).map((item, index) => (React.createElement(RoundedButton, { key: index, padding: "py-3", onClick: () => {
             clickYear(item);
         } },
         React.createElement(React.Fragment, null, item))))));
 };
 
-const Calendar = ({ date, onClickPrevious, onClickNext, changeMonth, changeYear }) => {
+const Calendar = ({ endYear, date, onClickPrevious, onClickNext, changeMonth, changeYear }) => {
     // Contexts
     const { period, changePeriod, changeDayHover, showFooter, changeDatepickerValue, hideDatepicker, asSingle, i18n, startWeekOn, input } = useContext(DatepickerContext);
     loadLanguageModule(i18n);
@@ -1392,7 +1392,7 @@ const Calendar = ({ date, onClickPrevious, onClickNext, changeMonth, changeYear 
                     React.createElement(DoubleChevronRightIcon, { className: "h-5 w-5" }))))),
         React.createElement("div", { className: "px-0.5 sm:px-2 mt-0.5 min-h-[285px]" },
             showMonths && React.createElement(Months, { clickMonth: clickMonth }),
-            showYears && React.createElement(Years, { year: year, clickYear: clickYear }),
+            showYears && React.createElement(Years, { year: year, clickYear: clickYear, endYear: endYear }),
             !showMonths && !showYears && (React.createElement(React.Fragment, null,
                 React.createElement(Week, null),
                 React.createElement(Days, { calendarData: calendarData, onClickPreviousDays: clickPreviousDays, onClickDay: clickDay, onClickNextDays: clickNextDays }))))));
@@ -1659,7 +1659,7 @@ function useOnClickOutside(ref, handler) {
     }, [ref, handler]);
 }
 
-const Datepicker = ({ primaryColor = "blue", value = null, onChange, useRange = true, showFooter = false, showShortcuts = false, configs = null, asSingle = false, placeholder = null, separator = "~", startFrom = null, i18n = "en", disabled = false, inputClassName = null, containerClassName = null, toggleClassName = null, toggleIcon = undefined, displayFormat = "YYYY-MM-DD", readOnly = false, minDate = null, maxDate = null, disabledDates = null, inputId, inputName, startWeekOn = "sun", classNames = undefined }) => {
+const Datepicker = ({ endYear = new Date().getFullYear(), primaryColor = "blue", value = null, onChange, useRange = true, showFooter = false, showShortcuts = false, configs = null, asSingle = false, placeholder = null, separator = "~", startFrom = null, i18n = "en", disabled = false, inputClassName = null, containerClassName = null, toggleClassName = null, toggleIcon = undefined, displayFormat = "YYYY-MM-DD", readOnly = false, minDate = null, maxDate = null, disabledDates = null, inputId, inputName, startWeekOn = "sun", classNames = undefined }) => {
     // Ref
     const containerRef = useRef(null);
     const calendarContainerRef = useRef(null);
@@ -1879,11 +1879,11 @@ const Datepicker = ({ primaryColor = "blue", value = null, onChange, useRange = 
                     React.createElement("div", { className: "flex flex-col lg:flex-row py-2" },
                         showShortcuts && React.createElement(Shortcuts, null),
                         React.createElement("div", { className: `flex items-stretch flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-1.5 ${showShortcuts ? "md:pl-2" : "md:pl-1"} pr-2 lg:pr-1` },
-                            React.createElement(Calendar, { date: firstDate, onClickPrevious: previousMonthFirst, onClickNext: nextMonthFirst, changeMonth: changeFirstMonth, changeYear: changeFirstYear }),
+                            React.createElement(Calendar, { endYear: endYear, date: firstDate, onClickPrevious: previousMonthFirst, onClickNext: nextMonthFirst, changeMonth: changeFirstMonth, changeYear: changeFirstYear }),
                             useRange && (React.createElement(React.Fragment, null,
                                 React.createElement("div", { className: "flex items-center" },
                                     React.createElement(VerticalDash, null)),
-                                React.createElement(Calendar, { date: secondDate, onClickPrevious: previousMonthSecond, onClickNext: nextMonthSecond, changeMonth: changeSecondMonth, changeYear: changeSecondYear }))))),
+                                React.createElement(Calendar, { endYear: endYear, date: secondDate, onClickPrevious: previousMonthSecond, onClickNext: nextMonthSecond, changeMonth: changeSecondMonth, changeYear: changeSecondYear }))))),
                     showFooter && React.createElement(Footer, null))))));
 };
 

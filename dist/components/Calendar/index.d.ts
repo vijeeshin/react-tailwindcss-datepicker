@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React from "react";
 interface Props {
+    endYear: number;
     date: dayjs.Dayjs;
     onClickPrevious: () => void;
     onClickNext: () => void;

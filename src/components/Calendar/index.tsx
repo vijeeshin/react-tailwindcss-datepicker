@@ -27,6 +27,7 @@ import Week from "./Week";
 import Years from "./Years";
 
 interface Props {
+    endYear: number;
     date: dayjs.Dayjs;
     onClickPrevious: () => void;
     onClickNext: () => void;
@@ -35,6 +36,7 @@ interface Props {
 }
 
 const Calendar: React.FC<Props> = ({
+    endYear,
     date,
     onClickPrevious,
     onClickNext,
@@ -303,7 +305,7 @@ const Calendar: React.FC<Props> = ({
             <div className="px-0.5 sm:px-2 mt-0.5 min-h-[285px]">
                 {showMonths && <Months clickMonth={clickMonth} />}
 
-                {showYears && <Years year={year} clickYear={clickYear} />}
+                {showYears && <Years year={year} clickYear={clickYear} endYear={endYear} />}
 
                 {!showMonths && !showYears && (
                     <>

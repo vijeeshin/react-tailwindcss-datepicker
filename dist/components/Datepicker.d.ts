@@ -1,6 +1,7 @@
 import React from "react";
 import { DateValueType, DateType, DateRangeType, ClassNamesTypeProp } from "../types";
 interface Props {
+    endYear: number;
     primaryColor?: string;
     value: DateValueType;
     onChange: (value: DateValueType, e?: HTMLInputElement | null | undefined) => void;

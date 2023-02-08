@@ -5,14 +5,15 @@ import { generateArrayNumber } from "../../helpers";
 import { RoundedButton } from "../utils";
 
 interface Props {
+    endYear: number;
     year: number;
     clickYear: (data: number) => void;
 }
 
-const Years: React.FC<Props> = ({ year, clickYear }) => {
+const Years: React.FC<Props> = ({ year, clickYear, endYear }) => {
     return (
         <div className="w-full grid grid-cols-2 gap-2 mt-2">
-            {generateArrayNumber(year, new Date().getFullYear()).map((item, index) => (
+            {generateArrayNumber(year, endYear).map((item, index) => (
                 <RoundedButton
                     key={index}
                     padding="py-3"
