@@ -62,6 +62,7 @@ const Calendar: React.FC<Props> = ({
     const [showMonths, setShowMonths] = useState(false);
     const [showYears, setShowYears] = useState(false);
     const [year, setYear] = useState(date.year());
+    const [sYear, setSYear] = useState(date.year());
     // Functions
     const previous = useCallback(() => {
         return getLastDaysInMonth(
@@ -243,7 +244,7 @@ const Calendar: React.FC<Props> = ({
                     </div>
                 )}
 
-                {showYears && (
+                {/*  {showYears && (
                     <div className="flex-none">
                         <RoundedButton
                             roundedFull={true}
@@ -256,7 +257,7 @@ const Calendar: React.FC<Props> = ({
                             <DoubleChevronLeftIcon className="h-5 w-5" />
                         </RoundedButton>
                     </div>
-                )}
+                )} */}
 
                 <div className="flex flex-1 items-center space-x-1.5">
                     <div className="w-1/2">
@@ -290,7 +291,7 @@ const Calendar: React.FC<Props> = ({
                     </div>
                 )}
 
-                {showYears && (
+                {/*   {showYears && (
                     <div className="flex-none">
                         <RoundedButton
                             roundedFull={true}
@@ -303,13 +304,15 @@ const Calendar: React.FC<Props> = ({
                             <DoubleChevronRightIcon className="h-5 w-5" />
                         </RoundedButton>
                     </div>
-                )}
+                )} */}
             </div>
 
             <div className="px-0.5 sm:px-2 mt-0.5 min-h-[285px]">
                 {showMonths && <Months clickMonth={clickMonth} />}
 
-                {showYears && <Years year={year} clickYear={clickYear} endYear={endYear} />}
+                {showYears && (
+                    <Years year={year} clickYear={clickYear} endYear={endYear} sYear={sYear} />
+                )}
 
                 {!showMonths && !showYears && (
                     <>

@@ -1,5 +1,6 @@
 import React from "react";
 interface Props {
+    sYear: number;
     endYear: number;
     year: number;
     clickYear: (data: number) => void;

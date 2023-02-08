@@ -927,17 +927,9 @@ const ChevronLeftIcon = ({ className = "w-6 h-6" }) => {
     return (React__default["default"].createElement("svg", { className: className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
         React__default["default"].createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M15.75 19.5L8.25 12l7.5-7.5" })));
 };
-const DoubleChevronLeftIcon = ({ className = "w-6 h-6" }) => {
-    return (React__default["default"].createElement("svg", { className: className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
-        React__default["default"].createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" })));
-};
 const ChevronRightIcon = ({ className = "w-6 h-6" }) => {
     return (React__default["default"].createElement("svg", { className: className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
         React__default["default"].createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M8.25 4.5l7.5 7.5-7.5 7.5" })));
-};
-const DoubleChevronRightIcon = ({ className = "w-6 h-6" }) => {
-    return (React__default["default"].createElement("svg", { className: className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
-        React__default["default"].createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" })));
 };
 // eslint-disable-next-line react/display-name,@typescript-eslint/ban-types
 const Arrow = React__default["default"].forwardRef((props, ref) => {
@@ -1222,8 +1214,9 @@ const Week = () => {
         .format("ddd"))))))));
 };
 
-const Years = ({ year, clickYear, endYear }) => {
-    return (React__default["default"].createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(year, endYear).map((item, index) => (React__default["default"].createElement(RoundedButton, { key: index, padding: "py-3", onClick: () => {
+const Years = ({ year, clickYear, endYear, sYear }) => {
+    console.log(year);
+    return (React__default["default"].createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(sYear, endYear).map((item, index) => (React__default["default"].createElement(RoundedButton, { key: index, padding: "py-3", onClick: () => {
             clickYear(item);
         } },
         React__default["default"].createElement(React__default["default"].Fragment, null, item))))));
@@ -1237,6 +1230,7 @@ const Calendar = ({ endYear, date, onClickPrevious, onClickNext, changeMonth, ch
     const [showMonths, setShowMonths] = React.useState(false);
     const [showYears, setShowYears] = React.useState(false);
     const [year, setYear] = React.useState(date.year());
+    const [sYear, setSYear] = React.useState(date.year());
     // Functions
     const previous = React.useCallback(() => {
         return getLastDaysInMonth(previousMonth(date), getNumberOfDay(getFirstDayInMonth(date).ddd, i18n, startWeekOn));
@@ -1371,13 +1365,6 @@ const Calendar = ({ endYear, date, onClickPrevious, onClickNext, changeMonth, ch
             !showMonths && !showYears && (React__default["default"].createElement("div", { className: "flex-none" },
                 React__default["default"].createElement(RoundedButton, { roundedFull: true, onClick: onClickPrevious },
                     React__default["default"].createElement(ChevronLeftIcon, { className: "h-5 w-5" })))),
-            showYears && (React__default["default"].createElement("div", { className: "flex-none" },
-                React__default["default"].createElement(RoundedButton, { roundedFull: true, onClick: () => {
-                        if (!endYear) {
-                            setYear(year - 1);
-                        }
-                    } },
-                    React__default["default"].createElement(DoubleChevronLeftIcon, { className: "h-5 w-5" })))),
             React__default["default"].createElement("div", { className: "flex flex-1 items-center space-x-1.5" },
                 React__default["default"].createElement("div", { className: "w-1/2" },
                     React__default["default"].createElement(RoundedButton, { onClick: () => {
@@ -1393,17 +1380,10 @@ const Calendar = ({ endYear, date, onClickPrevious, onClickNext, changeMonth, ch
                         React__default["default"].createElement(React__default["default"].Fragment, null, calendarData.date.year())))),
             !showMonths && !showYears && (React__default["default"].createElement("div", { className: "flex-none" },
                 React__default["default"].createElement(RoundedButton, { roundedFull: true, onClick: onClickNext },
-                    React__default["default"].createElement(ChevronRightIcon, { className: "h-5 w-5" })))),
-            showYears && (React__default["default"].createElement("div", { className: "flex-none" },
-                React__default["default"].createElement(RoundedButton, { roundedFull: true, onClick: () => {
-                        if (year < endYear) {
-                            setYear(year + 1);
-                        }
-                    } },
-                    React__default["default"].createElement(DoubleChevronRightIcon, { className: "h-5 w-5" }))))),
+                    React__default["default"].createElement(ChevronRightIcon, { className: "h-5 w-5" }))))),
         React__default["default"].createElement("div", { className: "px-0.5 sm:px-2 mt-0.5 min-h-[285px]" },
             showMonths && React__default["default"].createElement(Months, { clickMonth: clickMonth }),
-            showYears && React__default["default"].createElement(Years, { year: year, clickYear: clickYear, endYear: endYear }),
+            showYears && (React__default["default"].createElement(Years, { year: year, clickYear: clickYear, endYear: endYear, sYear: sYear })),
             !showMonths && !showYears && (React__default["default"].createElement(React__default["default"].Fragment, null,
                 React__default["default"].createElement(Week, null),
                 React__default["default"].createElement(Days, { calendarData: calendarData, onClickPreviousDays: clickPreviousDays, onClickDay: clickDay, onClickNextDays: clickNextDays }))))));

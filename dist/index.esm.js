@@ -920,17 +920,9 @@ const ChevronLeftIcon = ({ className = "w-6 h-6" }) => {
     return (React.createElement("svg", { className: className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
         React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M15.75 19.5L8.25 12l7.5-7.5" })));
 };
-const DoubleChevronLeftIcon = ({ className = "w-6 h-6" }) => {
-    return (React.createElement("svg", { className: className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
-        React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" })));
-};
 const ChevronRightIcon = ({ className = "w-6 h-6" }) => {
     return (React.createElement("svg", { className: className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
         React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M8.25 4.5l7.5 7.5-7.5 7.5" })));
-};
-const DoubleChevronRightIcon = ({ className = "w-6 h-6" }) => {
-    return (React.createElement("svg", { className: className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
-        React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" })));
 };
 // eslint-disable-next-line react/display-name,@typescript-eslint/ban-types
 const Arrow = React.forwardRef((props, ref) => {
@@ -1215,8 +1207,9 @@ const Week = () => {
         .format("ddd"))))))));
 };
 
-const Years = ({ year, clickYear, endYear }) => {
-    return (React.createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(year, endYear).map((item, index) => (React.createElement(RoundedButton, { key: index, padding: "py-3", onClick: () => {
+const Years = ({ year, clickYear, endYear, sYear }) => {
+    console.log(year);
+    return (React.createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(sYear, endYear).map((item, index) => (React.createElement(RoundedButton, { key: index, padding: "py-3", onClick: () => {
             clickYear(item);
         } },
         React.createElement(React.Fragment, null, item))))));
@@ -1230,6 +1223,7 @@ const Calendar = ({ endYear, date, onClickPrevious, onClickNext, changeMonth, ch
     const [showMonths, setShowMonths] = useState(false);
     const [showYears, setShowYears] = useState(false);
     const [year, setYear] = useState(date.year());
+    const [sYear, setSYear] = useState(date.year());
     // Functions
     const previous = useCallback(() => {
         return getLastDaysInMonth(previousMonth(date), getNumberOfDay(getFirstDayInMonth(date).ddd, i18n, startWeekOn));
@@ -1364,13 +1358,6 @@ const Calendar = ({ endYear, date, onClickPrevious, onClickNext, changeMonth, ch
             !showMonths && !showYears && (React.createElement("div", { className: "flex-none" },
                 React.createElement(RoundedButton, { roundedFull: true, onClick: onClickPrevious },
                     React.createElement(ChevronLeftIcon, { className: "h-5 w-5" })))),
-            showYears && (React.createElement("div", { className: "flex-none" },
-                React.createElement(RoundedButton, { roundedFull: true, onClick: () => {
-                        if (!endYear) {
-                            setYear(year - 1);
-                        }
-                    } },
-                    React.createElement(DoubleChevronLeftIcon, { className: "h-5 w-5" })))),
             React.createElement("div", { className: "flex flex-1 items-center space-x-1.5" },
                 React.createElement("div", { className: "w-1/2" },
                     React.createElement(RoundedButton, { onClick: () => {
@@ -1386,17 +1373,10 @@ const Calendar = ({ endYear, date, onClickPrevious, onClickNext, changeMonth, ch
                         React.createElement(React.Fragment, null, calendarData.date.year())))),
             !showMonths && !showYears && (React.createElement("div", { className: "flex-none" },
                 React.createElement(RoundedButton, { roundedFull: true, onClick: onClickNext },
-                    React.createElement(ChevronRightIcon, { className: "h-5 w-5" })))),
-            showYears && (React.createElement("div", { className: "flex-none" },
-                React.createElement(RoundedButton, { roundedFull: true, onClick: () => {
-                        if (year < endYear) {
-                            setYear(year + 1);
-                        }
-                    } },
-                    React.createElement(DoubleChevronRightIcon, { className: "h-5 w-5" }))))),
+                    React.createElement(ChevronRightIcon, { className: "h-5 w-5" }))))),
         React.createElement("div", { className: "px-0.5 sm:px-2 mt-0.5 min-h-[285px]" },
             showMonths && React.createElement(Months, { clickMonth: clickMonth }),
-            showYears && React.createElement(Years, { year: year, clickYear: clickYear, endYear: endYear }),
+            showYears && (React.createElement(Years, { year: year, clickYear: clickYear, endYear: endYear, sYear: sYear })),
             !showMonths && !showYears && (React.createElement(React.Fragment, null,
                 React.createElement(Week, null),
                 React.createElement(Days, { calendarData: calendarData, onClickPreviousDays: clickPreviousDays, onClickDay: clickDay, onClickNextDays: clickNextDays }))))));

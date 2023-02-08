@@ -28,7 +28,7 @@ export default function Playground() {
     const [maxDate, setMaxDate] = useState("");
     const [disabledDates, setDisabledDates] = useState([]);
     const [newDisabledDates, setNewDisabledDates] = useState({ startDate: "", endDate: "" });
-    const [startFrom, setStartFrom] = useState("2023-03-01");
+    const [startFrom, setStartFrom] = useState("2020-03-01");
     const [startWeekOn, setStartWeekOn] = useState("");
 
     const handleChange = (value, e) => {
